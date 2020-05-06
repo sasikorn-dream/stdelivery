@@ -1,0 +1,53 @@
+
+img {
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	border: #ffffff;
+	border-width: 1px;
+	border-radius: 20px;
+	border-style: outset;
+}
+body {
+	background-color: #ffffff;
+}
+.btn-login {
+	font-family: "Bai Jamjuree", sans-serif;
+	font-size: 18px;
+	color: white;
+	width: 300px;
+	height: 50px;
+	background-color: #0c5ff8;
+	border: #000000;
+	border-radius: 15px;
+	margin-right: 50px;
+	padding-left: 20px;
+	top: 50%;
+	left: 45%;
+	margin-top: 20px;
+	margin-left: 80px;
+}
+.g-signin2 {
+	font-family: "Bai Jamjuree", sans-serif;
+	font-size: 18px;
+	width: 300px;
+	height: 50px;
+	background-color: #ffffff;
+	border: #000000;
+	border-radius: 15px;
+	margin-right: 50px;
+	padding-left: 20px;
+	top: 50%;
+	left: 45%;
+	margin-top: 15px;
+	margin-left: 80px;
+}
+.container {
+	background-color: #ffceb7;
+	width: 500px;
+	height: 300px;
+	margin-top: 100px;
+	padding-top: 50px;
+	border-radius: 25px;
+	margin-left: 350px;
+}
