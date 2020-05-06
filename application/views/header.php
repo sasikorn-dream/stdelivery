@@ -29,7 +29,7 @@
 
 </head>
 
-<body>
+<body ng-app="delivery">
 
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
         aria-hidden="true">
