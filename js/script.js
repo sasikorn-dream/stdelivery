@@ -4,12 +4,70 @@ var app = angular.module("delivery", ["LocalStorageModule"]);
 // });
 app
 	.controller("main", function ($scope, $http, localStorageService) {
+		$scope.cart = localStorageService.get("cart");
 		$scope.logout = function () {
 			// alert("logout");
 			$http.get("api/logout").then(function (res) {
 				console.log(res);
 				window.location.reload();
 			});
+		};
+		$scope.remove = function (index) {
+			swal({
+				title: "คุณต้องการลบเมนูนี้ใช่หรือไม่?",
+				// text:
+				// 	"Once deleted, you will not be able to recover this imaginary file!",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			}).then(function (willDelete) {
+				if (willDelete) {
+					$scope.cart.splice(index, 1);
+					$scope.$apply();
+					localStorageService.set("cart", $scope.cart);
+					swal("ลบเมนูเรียบร้อย!", {
+						icon: "success",
+					});
+				} else {
+					// swal("Your imaginary file is safe!");
+				}
+			});
+		};
+		$scope.total = function () {
+			var sum = 0;
+			$scope.cart.forEach(function (val) {
+				sum += val.products_price * val.count;
+			});
+			return sum;
+		};
+		$scope.remove_count = function (index) {
+			if ($scope.cart[index].count <= 1) {
+				swal({
+					title: "คุณต้องการลบเมนูนี้ใช่หรือไม่?",
+					// text:
+					// 	"Once deleted, you will not be able to recover this imaginary file!",
+					icon: "warning",
+					buttons: true,
+					dangerMode: true,
+				}).then(function (willDelete) {
+					if (willDelete) {
+						$scope.cart.splice(index, 1);
+						$scope.$apply();
+						swal("ลบเมนูเรียบร้อย!", {
+							icon: "success",
+						});
+					} else {
+						// swal("Your imaginary file is safe!");
+					}
+				});
+			} else {
+				$scope.cart[index].count--;
+			}
+			localStorageService.set("cart", $scope.cart);
+		};
+		$scope.add_count = function (index) {
+			$scope.cart[index].count++;
+			localStorageService.set("cart", $scope.cart);
 		};
 		$scope.add_cart = function (products_id, products_name, products_price) {
 			console.log(products_id, products_name, products_price);
@@ -27,7 +85,7 @@ app
 						products_id: products_id,
 						products_name: products_name,
 						products_price: products_price,
-						count: 1
+						count: 1,
 					});
 				}
 				localStorageService.set("cart", cart);
@@ -42,6 +100,7 @@ app
 				]);
 			}
 			// localStorageService.set("cart", products_id);
+			$scope.cart = localStorageService.get("cart");
 		};
 	})
 

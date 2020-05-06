@@ -20,6 +20,7 @@
         href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&family=K2D:ital@1&family=Mitr:wght@300;400&display=swap"
         rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="http://localhost/stdelivery/js/bootstrap.js"></script>
 
     <script src="http://localhost/stdelivery/js/script.js"></script>
@@ -94,7 +95,7 @@
     </div>
 
     <div ng-controller="main">
-        <div class="border-bottom shadow-sm">
+        <div class="border-bottom shadow-sm ">
             <div class="container">
                 <div
                     class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom box-shadow bgnav">

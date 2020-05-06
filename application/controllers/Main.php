@@ -20,15 +20,13 @@ class Main extends CI_Controller
 
     public function test($products_id)
     {
-        $product = $this->db->get_where("products", array('restaurant_id'=>$products_id));
-        if ($product ->num_rows()>0) {
+        $product = $this->db->get_where("products", array('restaurant_id' => $products_id));
+        if ($product->num_rows() > 0) {
             // pre($product->result());
-            
+
             $this->load->view('header');
-			$this->load->view('detailproduct', array('products' => $product->result_array()));
-			$this->load->view('footer');
-			
-			
+            $this->load->view('detailproduct', array('products' => $product->result_array()));
+            $this->load->view('footer');
         } else {
             echo 'not have';
         }
