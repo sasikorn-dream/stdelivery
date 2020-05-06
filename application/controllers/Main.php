@@ -15,7 +15,7 @@ class Main extends CI_Controller
 
         $this->load->view('header');
         $this->load->view('content_menushow', array('restaurants' => $all_restaurant));
-        $this->load->view('footer');
+        // $this->load->view('footer');
     }
 
     public function test($products_id)
@@ -26,7 +26,7 @@ class Main extends CI_Controller
 
             $this->load->view('header');
             $this->load->view('detailproduct', array('products' => $product->result_array()));
-            $this->load->view('footer');
+            // $this->load->view('footer');
         } else {
             echo 'not have';
         }

@@ -21,6 +21,7 @@
         rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- <script src="=http://localhost/stdelivery/js/ui-bootstrap-tpls-3.0.6.js"></script> -->
     <script src="http://localhost/stdelivery/js/bootstrap.js"></script>
 
     <script src="http://localhost/stdelivery/js/script.js"></script>

@@ -30,25 +30,25 @@
     </div>
 </div>
 <div class="container">
-    <table class="table table-dark" ng-if="cart.length>0">
+    <table class="table table-success" ng-if="cart.length>0">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Count</th>
-                <th scope="col">Total</th>
+                <th scope="col"></th>
+                <th scope="col">รายการ</th>
+                <th scope="col">ราคา</th>
+                <th scope="col">จำนวน</th>
+                <th scope="col">รวม</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="c in cart">
                 <td scope="row">{{$index+1}}</td>
-                <td>{{c.products_name}}</td>
+                <td class="text-dark">{{c.products_name}}</td>
                 <td>฿{{c.products_price|number:2}}</td>
                 <td>
-                    <button class="btn btn-default text-dark" ng-click="remove_count($index)">-</button>
+                    <button class="btn btn-dark text-light" ng-click="remove_count($index)">-</button>
                     &nbsp;{{c.count}}&nbsp;
-                    <button class="btn btn-default text-dark" ng-click="add_count($index)">+</button></td>
+                    <button class="btn btn-dark text-light" ng-click="add_count($index)">+</button></td>
                 <td>฿{{c.count*c.products_price|number:2}}</td>
                 <td>
                     <button class="btn btn-danger text-light" ng-click="remove($index)">delete</button>
@@ -58,6 +58,7 @@
                 <td></td>
                 <td colspan="3">รวม</td>
                 <td>฿{{total()|number:2}}</td>
+                <td></td>
             </tr>
         </tbody>
     </table>

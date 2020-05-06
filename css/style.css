@@ -30,6 +30,7 @@
 }
 .bgnav {
 	background-color: #f95b14;
+	z-index: 100;
 }
 .searchrestaurant {
 	font-family: "Mitr", sans-serif;

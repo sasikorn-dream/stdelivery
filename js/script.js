@@ -2,12 +2,76 @@ var app = angular.module("delivery", ["LocalStorageModule"]);
 // app.config(function (localStorageServiceProvider) {
 // 	localStorageServiceProvider.setStorageType("sessionStorage");
 // });
+app.service("ApiService", function ($http) {
+	this.base_url = function () {
+		return "http://localhost/ci/api/";
+	};
+	this.addcart = function () {};
+	this.get = function (uri) {
+		return $http.get(this.base_url() + uri);
+	};
+	this.post = function (uri, data) {
+		return $http.post(this.base_url() + uri, data);
+	};
+});
+
+app.factory("Cart", function (localStorageService, ApiService) {
+	var Cart = {
+		get_name: "ดรีม",
+		base_url: function () {
+			var name = Cart.get_name;
+			return ApiService.base_url();
+		},
+		addCart: function (products_id, products_name, products_price) {
+			var url = Cart.base_url();
+
+			var cart = localStorageService.get("cart");
+			if (cart) {
+				var not_have = true;
+				cart.forEach(function (val, key) {
+					if (val.products_id == products_id) {
+						cart[key].count++;
+						not_have = false;
+					}
+				});
+				if (not_have) {
+					cart.push({
+						products_id: products_id,
+						products_name: products_name,
+						products_price: products_price,
+						count: 1,
+					});
+				}
+				localStorageService.set("cart", cart);
+			} else {
+				localStorageService.set("cart", [
+					{
+						products_id: products_id,
+						products_name: products_name,
+						products_price: products_price,
+						count: 1,
+					},
+				]);
+			}
+		},
+		removeCart: function () {
+			return "084555";
+		},
+	};
+	return Cart;
+});
 app
-	.controller("main", function ($scope, $http, localStorageService) {
+	.controller("main", function (
+		$scope,
+		$http,
+		localStorageService,
+		ApiService,
+		Cart
+	) {
 		$scope.cart = localStorageService.get("cart");
 		$scope.logout = function () {
 			// alert("logout");
-			$http.get("api/logout").then(function (res) {
+			ApiService.get("logout").then(function (res) {
 				console.log(res);
 				window.location.reload();
 			});
@@ -70,41 +134,15 @@ app
 			localStorageService.set("cart", $scope.cart);
 		};
 		$scope.add_cart = function (products_id, products_name, products_price) {
-			console.log(products_id, products_name, products_price);
-			var cart = localStorageService.get("cart");
-			if (cart) {
-				var not_have = true;
-				cart.forEach(function (val, key) {
-					if (val.products_id == products_id) {
-						cart[key].count++;
-						not_have = false;
-					}
-				});
-				if (not_have) {
-					cart.push({
-						products_id: products_id,
-						products_name: products_name,
-						products_price: products_price,
-						count: 1,
-					});
-				}
-				localStorageService.set("cart", cart);
-			} else {
-				localStorageService.set("cart", [
-					{
-						products_id: products_id,
-						products_name: products_name,
-						products_price: products_price,
-						count: 1,
-					},
-				]);
-			}
+			// console.log(products_id, products_name, products_price);
+
 			// localStorageService.set("cart", products_id);
+			Cart.addCart(products_id, products_name, products_price);
 			$scope.cart = localStorageService.get("cart");
 		};
 	})
 
-	.controller("login", function ($scope, $http) {
+	.controller("login", function ($scope, $http, ApiService) {
 		// alert("login");
 		$scope.user = {
 			username: "",
@@ -115,7 +153,7 @@ app
 		$scope.text = "test";
 		$scope.login = function () {
 			console.log($scope.user);
-			$http.post("api/login", $scope.user).then(function (res) {
+			ApiService.post("login", $scope.user).then(function (res) {
 				console.log(res);
 				if (res.data.login == "success") {
 					// alert('success');
