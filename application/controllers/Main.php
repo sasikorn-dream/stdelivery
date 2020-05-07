@@ -22,8 +22,6 @@ class Main extends CI_Controller
     {
         $product = $this->db->get_where("products", array('restaurant_id' => $products_id));
         if ($product->num_rows() > 0) {
-            // pre($product->result());
-
             $this->load->view('header');
             $this->load->view('detailproduct', array('products' => $product->result_array()));
             // $this->load->view('footer');
