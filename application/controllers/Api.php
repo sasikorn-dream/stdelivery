@@ -9,9 +9,18 @@ class Api extends CI_Controller
 		parent::__construct();
 	}
 
-	// public function index()
-	// {
-	// }
+	public function index()
+	{
+	}
+	public function is_login(){
+
+		if($this->session->userdata("login")){
+			echo 1;
+		}
+		else{
+			echo 0;
+		}
+}
 	public function login()
 	{
 		$postdata = file_get_contents("php://input");
@@ -32,13 +41,7 @@ class Api extends CI_Controller
 	{
 		echo $this->session->sess_destroy();
 	}
-// public function is_login(){
-// 	if($this->session->userdata("login")){
-// 		echo "1";
-// 	}else{
-// 		echo "0";
-// 	}
-}
+
 	public function register(){
 	
 		$postdata = file_get_contents("php://input");

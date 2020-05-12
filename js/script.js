@@ -4,7 +4,7 @@ var app = angular.module("delivery", ["LocalStorageModule"]);
 // });
 app.service("ApiService", function ($http) {
 	this.base_url = function () {
-		return "http://localhost/ci/api/";
+		return "http://localhost/stdelivery/";
 	};
 	this.addcart = function () {};
 	this.get = function (uri) {
@@ -69,9 +69,33 @@ app
 		Cart
 	) {
 		$scope.cart = localStorageService.get("cart");
+		$scope.send_order = function(){
+			console.log('send_order');
+			ApiService.get("index.php/api/is_login").then((res)=>{
+				console.log(res);
+				if(res.data == '1'){
+				}else{
+					swal({
+						title: "คุณยังไม่ได้เข้าสู่ระบบ ต้องการเข้าสู่ระบบ?",
+						// text:
+						// 	"Once deleted, you will not be able to recover this imaginary file!",
+						icon: "warning",
+						buttons: true,
+						dangerMode: true,
+					}).then(function (yes) {
+						if (yes) {
+							$('#loginModal').modal('show');
+							
+						} else {
+							// swal("Your imaginary file is safe!");
+						}
+					});
+				}
+			})
+		}
 		$scope.logout = function () {
 			// alert("logout");
-			ApiService.get("logout").then(function (res) {
+			ApiService.get("index.php/api/logout").then(function (res) {
 				console.log(res);
 				window.location.reload();
 			});
@@ -153,7 +177,7 @@ app
 		$scope.text = "test";
 		$scope.login = function () {
 			console.log($scope.user);
-			ApiService.post("login", $scope.user).then(function (res) {
+			ApiService.post("index.php/api/login", $scope.user).then(function (res) {
 				console.log(res);
 				if (res.data.login == "success") {
 					// alert('success');
@@ -170,7 +194,7 @@ app
 			});
 		};
 	})
-	.controller("register", function ($scope, $http) {
+	.controller("register", function ($scope, $http, ApiService) {
 		// alert("login");
 		$scope.user = {
 			username: "",
@@ -181,7 +205,7 @@ app
 		$scope.register_fail = false;
 		$scope.register = function () {
 			console.log($scope.user);
-			$http.post("api/register", $scope.user).then(function (res) {
+			ApiService.post("index.php/api/register", $scope.user).then(function (res) {
 				console.log(res);
 				if (res.data.register == "success") {
 					// alert('success');

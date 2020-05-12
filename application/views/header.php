@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <base href="http://localhost/stdelivery/index.php/">
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -11,20 +11,20 @@
     <title>ST Delivery</title>
 
     <link rel="stylesheet" href="http://localhost/stdelivery/css/bootstrap.css">
-    <link href="http://localhost/stdelivery/css/style.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
     <!-- <script src="http://localhost/stdelivery/js/angular.min.js"></script> -->
-    <script src="http://localhost/stdelivery/js/angular-local-storage.min.js"></script>
+    <script src="<?php echo base_url(); ?>js/angular-local-storage.min.js"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&family=K2D:ital@1&family=Mitr:wght@300;400&display=swap"
         rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- <script src="=http://localhost/stdelivery/js/ui-bootstrap-tpls-3.0.6.js"></script> -->
-    <script src="http://localhost/stdelivery/js/bootstrap.js"></script>
+    <script src="<?php echo base_url(); ?>js/bootstrap.js"></script>
 
-    <script src="http://localhost/stdelivery/js/script.js"></script>
+    <script src="<?php echo base_url(); ?>js/script.js"></script>
 
 
 
@@ -97,17 +97,19 @@
 
     <div ng-controller="main">
         <div class="border-bottom shadow-sm ">
-            <div class="container">
+            <!-- <div class="container"> -->
                 <div
                     class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom box-shadow bgnav">
                     <a href="<?php echo base_url(); ?>" class="my-0 mr-md-auto font-weight-normal company">ST
                         Delivery</a>
-                    <input type="text" name="search" class="searchrestaurant" placeholder="search">
 
                     <?php
 					if ($this->session->userdata("login")) {
-						$user = $this->session->userdata("user"); ?>
+                        
+						$user = $this->session->userdata("user"); ?> 
+                    <a href="<?php echo base_url(); ?>index.php/main/cart">ตะกร้าสินค้า</a>
                     <p><?php echo  $user->username; ?>&nbsp;</p>
+                   
                     &nbsp;<button class="btn btn-outline-light" ng-click="logout()">ออกจากระบบ</button>
                     <?php
 					} else {
@@ -118,6 +120,6 @@
 					}
 					?>
 
-                </div>
+                <!-- </div> -->
             </div>
         </div>
